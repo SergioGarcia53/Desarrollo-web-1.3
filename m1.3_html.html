@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Desarrollo de aplicaciones web</title>
+</head>
+<body>
+
+<h1>META 1.3</h1>
+
+<div id="resultado"></div>
+
+<script>
+  let num=prompt("Cuantos numeros desea generar: ");
+  
+ let nProcesos = parseInt(num);
+
+const procesos= [];
+
+const codigos= ["a=1+2","console.log('1+2')","console.log(a)","b=2+3","c=4+5","console.log('Hola mundo')","d=100-8"];
+if(nProcesos!=0){
+    iniciarSimulacion(nProcesos);
+    simular();
+}
+
+function iniciarSimulacion(nProcesos){
+    for(let i=0;i<nProcesos;i++)
+    {
+        let proceso= new Object();
+        proceso.numero=i+1;
+        proceso.codigo=[];
+        
+        let nCodigos=Math.floor(Math.random() * 7)+1;
+        for(let j=0;j<nCodigos;j++)
+        {
+            let n=lineaCodigo();
+            proceso.codigo.push(codigos[n]);
+        }
+        procesos.push(proceso);
+    }
+}
+
+function lineaCodigo(){
+    let x=Math.floor(Math.random() * 7);
+    return x;
+}
+
+function simular(){
+    let resultadoHTML = '';
+    for(let j=0;j<7;j++){
+        for(let i=0;i<procesos.length;i++)
+        {
+            if((procesos[i].codigo[j])!=null){
+                resultadoHTML += "Proceso " + (i+1) + "<br>";
+                resultadoHTML += procesos[i].codigo[j] + "<br><br>";
+            }
+        }
+    }
+    document.getElementById("resultado").innerHTML = resultadoHTML;
+}
+</script>
+
+</body>
+</html>
